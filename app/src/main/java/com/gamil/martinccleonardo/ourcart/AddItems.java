@@ -1,16 +1,21 @@
 package com.gamil.martinccleonardo.ourcart;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.gamil.martinccleonardo.ourcart.databinding.ActivityScrollingBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -18,13 +23,33 @@ import com.google.android.material.snackbar.Snackbar;
 public class AddItems extends AppCompatActivity {
     private ActivityScrollingBinding binding;
 
+    TextView text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_items);
+
+        text = findViewById(R.id.textView);
+        Log.d("DEBUG", "Attempting to process account");
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            text.setText(personId);
+        } else {
+            text.setText("No account");
+        }
+        Log.d("DEBUG", "Processing completed");
+
 
         //binding = ActivityScrollingBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
-        setContentView(R.layout.activity_add_items);
 
         Button addItemBtn;
 

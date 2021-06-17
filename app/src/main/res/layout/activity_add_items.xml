@@ -12,7 +12,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginBottom="52dp"
         android:text="Add Item Page"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
